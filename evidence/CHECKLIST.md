@@ -1,21 +1,22 @@
 # CA evidence checklist
 
-The local database work and document model were confirmed in an earlier pgAdmin/Compass session; status below distinguishes that from evidence still to capture for the portfolio.
+This table records what was actually run locally on 3 November 2026. Keep the screenshots in the evidence folders when captured; do not treat drafted scripts or diagrams as test results.
 
-| Requirement | Current status | Action for final portfolio |
+| Requirement | Verified status | Next step |
 | --- | --- | --- |
-| Case study stated consistently | Drafted as a telemedicine platform | Confirm users and scope match your project, and explain the patient-to-doctor-to-prescription flow. |
-| PostgreSQL telemedicine schema and sample report | Earlier seven-table model was verified; telemedicine migration has not yet run | Run the updated SQL; capture consultation, pharmacy-distance, and nurse-schedule outputs. |
-| ERD and normalisation explanation | Drafted | Review relationships and defend the normalization choices. |
-| Query plans and performance analysis | Script prepared, results not yet recorded | Run `portfolio-2-query-optimisation/queries.sql`; paste actual plans and explain observed outcomes. |
-| Commit, rollback, savepoint | Script prepared, results not yet recorded | Run `portfolio-3-transactions-concurrency/transactions.sql`; capture output. |
-| Concurrent row lock | Exercise documented, not yet observed | Use two pgAdmin sessions; record the wait/release and final row state. |
-| MongoDB model | Patient/doctor collections previously verified; new pharmacy/nurse collections are prepared only | Import the new JSON collections, build the indexes, and capture a nearby-pharmacy search and nurse schedule. |
-| Distributed/cloud activity | Design discussion drafted; no cloud setup claimed | Add an architecture sketch and explain availability/consistency trade-offs in your own words. |
-| GitHub repository and progressive commits | Private repository created; portfolio draft committed and folder paths verified | Add actual evidence and later updates as you complete them. Do not claim this represents development throughout the semester or fabricate earlier history. |
-| 2–3 page LMS documentation | Draft template only | Fill measurements, references, actual GitHub URL, and your own reflection; check final page count. |
-| AI declaration and source acknowledgement | Suggested declaration included | Make it accurate to the assistance and review you actually performed. |
-| LMS submission | Not performed | Submit the finished documentation and evidence yourself after review. |
+| Case study | Draft consistently describes MediCare as telemedicine: video consultation, clinician prescription, pharmacy search, nurse follow-up bookings. | Review wording and defend scope. |
+| PostgreSQL schema | `medicare_hospital_db` is connected in pgAdmin. The schema script ran successfully in pgAdmin; its messages are saved in `portfolio-1/postgresql-schema-run.txt`. | Capture screenshot. Re-run report with richer non-NULL demo symptoms/diagnoses if appropriate; save outputs for nurse schedule and pharmacy proximity. |
+| Consultation report | Actual two-row CSV saved in `portfolio-1/consultation-report.csv`. | Capture pgAdmin screenshot and explain the sample data. |
+| ERD and normalization | Drafted; not independently reviewed by student. | Review relationships and explain normalization. |
+| Query plans | Both baseline and post-index `EXPLAIN ANALYZE` plans saved as CSV. Both chose Seq Scan on the two-row appointments table. | Capture screenshot; run query suite/partial payment index; explain tiny-sample limitation. |
+| Commit/rollback/savepoint | Transaction script ran; follow-up query showed exactly event 1 (`committed example`) after savepoint and full rollback. CSV saved in `portfolio-3/transaction-final-state.csv`. | Capture screenshot. |
+| Concurrent row lock | Documented but not yet observed in two sessions. | Perform in two sessions, record wait and release, then rollback B. |
+| MongoDB documents | Compass shows 2 patients, 2 doctors, 2 pharmacies, 2 nurses, and 1 nurse care request with 2 care visits. | Capture screenshots. |
+| Mongo indexes and queries | Only automatic `_id` indexes are confirmed; additional indexes and sample queries have not yet been run. | Create indexes; execute near-pharmacy, consultation, and nurse schedule queries; save evidence. |
+| Distributed/cloud activity | Architecture discussion and diagram drafted. No cloud deployment claimed. | Review and defend consistency, failover and scale-out choices. |
+| GitHub | Private repository contains the portfolio drafts; actual outputs from this session still need uploading. | Upload evidence and later updates. Do not claim semester-long progressive history. |
+| LMS summary and AI declaration | Template only; student reflection and declaration require truthful personal completion. | Complete and page-check the final 2–3 page document. |
+| LMS submission | Not performed. | Student reviews and submits. |
 
-All demo clinical data and pharmacy points are fictional and placeholder-only. Keep real patient information and precise user locations out of coursework screenshots and repository files.
+All records and pharmacy points are fictional coursework examples. Sample medication text is not medical guidance.
 
