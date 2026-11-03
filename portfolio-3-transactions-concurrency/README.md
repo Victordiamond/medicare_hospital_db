@@ -1,8 +1,8 @@
 # Portfolio 3 — Transactions and concurrency
 
-[`transactions.sql`](transactions.sql) demonstrates a transaction, a savepoint rollback, a commit, and a full rollback using a temporary table so the example does not alter hospital records. Execute sequentially in one pgAdmin session and capture output showing the final rows.
+The temporary-table demonstration was run in pgAdmin on 3 November 2026. It inserted a committed example, rolled back the optional row to a savepoint, committed, then inserted a third row and fully rolled it back. A follow-up `SELECT * FROM transaction_demo ORDER BY event_id` returned exactly one row: `1, committed example`. The observed CSV is in [`../evidence/portfolio-3/transaction-final-state.csv`](../evidence/portfolio-3/transaction-final-state.csv).
 
-The final comments provide a two-session row-lock exercise using the sample nurse visit. In Session A, hold a `FOR UPDATE` lock; in Session B, update that same row and observe it wait; commit A and observe B continue. Roll back B to leave the booking unchanged. Do not execute both sessions as one script: concurrency is only observable with separate sessions. Record your actual observation and the isolation level. PostgreSQL's default is READ COMMITTED; row locks serialize conflicting writes to the same nurse visit, while unrelated rows can be updated concurrently.
+This verifies the transaction/savepoint/full-rollback result for the current pgAdmin session. The table is temporary and contains no hospital records.
 
-Evidence still needed: screenshot/output for committed and rolled-back rows, and a screenshot or written observation of the two-session wait and release. Roll back the demonstration status change so the booking remains as it was.
+The separate two-session row-lock exercise is still untested. In Session A, hold a `FOR UPDATE` lock on the sample nurse visit; in Session B, update that same row and observe the wait; commit A and observe B continue; roll back B. Record only what is observed and the isolation level.
 
