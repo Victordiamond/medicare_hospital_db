@@ -1,16 +1,21 @@
 flowchart LR
-    P[Patient app] --> API[Telemedicine application/API]
-    D[Doctor portal] --> API
-    N[Nurse portal] --> API
-    PH[Pharmacy portal] --> API
-    API --> PG[(PostgreSQL primary<br/>consultations, prescriptions,<br/>care bookings, billing)]
-    PG -->|streaming replication| ST[(Standby replica<br/>failover target)]
-    PG -->|read-only replication| RR[(Read replica<br/>search and reports)]
-    API --> MG[(MongoDB replica set<br/>patient history documents)]
-    API --> VIDEO[Video meeting provider<br/>meeting reference only in CA DB]
-    API --> MAP[Map and routing provider<br/>pharmacy coordinates/search]
-    API --> AUDIT[Audit logs and backup service]
-
-    classDef external fill:#fff4d6,stroke:#946200,color:#222;
-    class VIDEO,MAP external;
+    subgraph CLIENTS[Telemedicine portals]
+      P[Patient app]
+      D[Doctor portal]
+      N[Nurse portal]
+      PH[Pharmacy portal]
+    end
+    P --> API[Telemedicine API]
+    D --> API
+    N --> API
+    PH --> API
+    API -->|authoritative writes and read-after-write| PG[(PostgreSQL primary)]
+    PG -->|streaming replication| ST[(Standby for fenced failover)]
+    PG -->|asynchronous read-only replication| RR[(Search and reporting replica)]
+    API -->|history projection through outbox consumer| MG[(MongoDB replica set)]
+    API --> VIDEO[Video meeting provider]
+    API --> MAP[Map and routing provider]
+    PG --> BACKUP[Backup and point-in-time recovery]
+    RR -. monitored lag .-> API
+    ST -. failover requires fencing .-> PG
 
