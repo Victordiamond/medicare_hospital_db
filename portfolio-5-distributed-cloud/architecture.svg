@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">MediCare telemedicine distributed database design</title>
+  <desc id="desc">Patient, doctor, nurse and pharmacy portals connect to a telemedicine API. PostgreSQL is the authoritative primary with a standby and a read replica. An outbox consumer updates a MongoDB replica set. Video, map and backup services are external.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#35516f"/></marker>
+    <style>
+      text{font-family:Segoe UI,Arial,sans-serif;fill:#18324b}.title{font-size:28px;font-weight:700}.sub{font-size:16px;fill:#52677c}.box{fill:#fff;stroke:#7c98b5;stroke-width:2;rx:14}.db{fill:#eaf2fb;stroke:#3574a5;stroke-width:2;rx:18}.ext{fill:#fff5df;stroke:#bd8a2d;stroke-width:2;rx:14}.label{font-size:18px;font-weight:650}.small{font-size:14px;fill:#52677c}.line{stroke:#35516f;stroke-width:2.5;fill:none;marker-end:url(#arrow)}.dash{stroke:#617c98;stroke-width:2;fill:none;stroke-dasharray:8 7;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1400" height="760" fill="#f5f8fc"/>
+  <text x="52" y="55" class="title">MediCare telemedicine | proposed distributed database design</text>
+  <text x="52" y="84" class="sub">Design proposal only. No cloud deployment or failover test is claimed.</text>
+
+  <rect x="55" y="145" width="205" height="390" class="box"/>
+  <text x="82" y="180" class="label">Portals</text>
+  <rect x="82" y="205" width="150" height="54" class="box"/><text x="101" y="239" class="small">Patient app</text>
+  <rect x="82" y="280" width="150" height="54" class="box"/><text x="101" y="314" class="small">Doctor portal</text>
+  <rect x="82" y="355" width="150" height="54" class="box"/><text x="101" y="389" class="small">Nurse portal</text>
+  <rect x="82" y="430" width="150" height="54" class="box"/><text x="101" y="464" class="small">Pharmacy portal</text>
+
+  <rect x="330" y="270" width="220" height="125" class="box"/>
+  <text x="358" y="313" class="label">Telemedicine API</text>
+  <text x="358" y="343" class="small">Booking, care, payment</text>
+  <text x="358" y="365" class="small">freshness and retry rules</text>
+  <path d="M260 337 H330" class="line"/>
+
+  <rect x="670" y="185" width="255" height="155" class="db"/>
+  <text x="701" y="225" class="label">PostgreSQL primary</text>
+  <text x="701" y="256" class="small">Authoritative writes:</text>
+  <text x="701" y="280" class="small">appointments, prescriptions,</text>
+  <text x="701" y="304" class="small">nurse bookings, billing</text>
+  <path d="M550 310 H670" class="line"/>
+  <text x="559" y="295" class="small">writes and fresh reads</text>
+
+  <rect x="1035" y="130" width="255" height="110" class="db"/>
+  <text x="1070" y="172" class="label">Standby replica</text>
+  <text x="1070" y="202" class="small">Promote only after fencing</text>
+  <path d="M925 215 H1035" class="line"/>
+  <text x="942" y="198" class="small">streaming</text>
+
+  <rect x="1035" y="285" width="255" height="110" class="db"/>
+  <text x="1067" y="326" class="label">Read-only replica</text>
+  <text x="1067" y="356" class="small">Search and reports; monitor lag</text>
+  <path d="M925 285 H980 V340 H1035" class="line"/>
+  <path d="M1035 375 H980 V435 H550" class="dash"/>
+  <text x="740" y="426" class="small">stale-tolerant reads only</text>
+
+  <rect x="670" y="470" width="255" height="115" class="db"/>
+  <text x="703" y="512" class="label">MongoDB replica set</text>
+  <text x="703" y="542" class="small">Patient history documents</text>
+  <text x="703" y="564" class="small">updated via outbox consumer</text>
+  <path d="M440 395 V525 H670" class="line"/>
+  <text x="456" y="510" class="small">event projection</text>
+
+  <rect x="1035" y="470" width="255" height="65" class="ext"/>
+  <text x="1064" y="510" class="label">Backup / point-in-time recovery</text>
+  <path d="M925 265 H995 V503 H1035" class="dash"/>
+
+  <rect x="330" y="610" width="235" height="70" class="ext"/>
+  <text x="365" y="641" class="label">Video meeting provider</text>
+  <text x="365" y="664" class="small">Store meeting reference only</text>
+  <path d="M425 395 V575 H447 V610" class="line"/>
+  <rect x="600" y="610" width="235" height="70" class="ext"/>
+  <text x="638" y="641" class="label">Map / routing provider</text>
+  <text x="638" y="664" class="small">Coordinates are not road routes</text>
+  <path d="M485 395 V596 H717 V610" class="line"/>
+
+  <text x="55" y="728" class="small">Single-writer design. Replica lag is acceptable for selected browse/report views only; confirm availability on the primary before booking.</text>
+</svg>
+
