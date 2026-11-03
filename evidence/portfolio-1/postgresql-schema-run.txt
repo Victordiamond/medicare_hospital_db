@@ -1,0 +1,19 @@
+Source: pgAdmin 4 Query Tool connected to medicare_hospital_db
+Captured: 2026-11-03
+
+NOTICE:  relation "patients" already exists, skipping
+NOTICE:  relation "doctors" already exists, skipping
+NOTICE:  relation "appointments" already exists, skipping
+NOTICE:  relation "medical_records" already exists, skipping
+NOTICE:  relation "prescriptions" already exists, skipping
+NOTICE:  relation "billing" already exists, skipping
+NOTICE:  relation "payments" already exists, skipping
+NOTICE:  relation "idx_appointments_patient" already exists, skipping
+NOTICE:  relation "idx_appointments_doctor_start" already exists, skipping
+NOTICE:  relation "idx_medical_records_patient_time" already exists, skipping
+NOTICE:  relation "idx_prescriptions_patient" already exists, skipping
+NOTICE:  relation "idx_billing_patient" already exists, skipping
+NOTICE:  relation "idx_payments_billing" already exists, skipping
+Successfully run. Total query runtime: 224 msec.
+1 rows affected.
+
