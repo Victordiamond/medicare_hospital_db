@@ -15,17 +15,17 @@ MediCare is a simulated telemedicine platform used by patients, doctors, nurses,
 
 The consultation-history query joins patients, video appointments, doctors, and optional medical records. The optimisation exercise captures PostgreSQL's `EXPLAIN (ANALYZE, BUFFERS)` output before and after a composite patient/date index, and examines a partial index for completed payments.
 
-**Measured result:** [Paste the actual plan/timings from your pgAdmin run. State row counts, plan nodes, buffers, and whether the index was chosen. The demo is tiny, so a sequential scan may be the right plan. Do not claim an improvement unless your captured output shows it.]
+**Measured result (PostgreSQL 18, two appointment rows):** Both EXPLAIN ANALYZE plans estimated one result row and returned one. Before the composite index, the appointment access used `Seq Scan` followed by `Sort`; shared buffers were hit=3 and execution time was 0.068 ms. After index creation, PostgreSQL still chose `Seq Scan` and `Sort`; shared buffers were hit=3 and execution time was 0.087 ms. The patient-email lookup used its existing unique index in both runs. These tiny times do not establish a performance change; a larger dataset is needed. Raw outputs: `evidence/portfolio-2/plan-before-index.csv` and `plan-after-index.csv`. The completed-payment partial-index query is not yet tested.
 
 ## Portfolio 3 — transactions and concurrency
 
-The transaction script demonstrates `COMMIT`, `ROLLBACK`, and savepoint rollback on a temporary table so the hospital demo rows are not changed. A two-session exercise uses `SELECT ... FOR UPDATE` to show how PostgreSQL waits when two sessions update the same billing row.
+The transaction script demonstrates `COMMIT`, `ROLLBACK`, and savepoint rollback on a temporary table so the hospital demo rows are not changed. A two-session exercise uses `SELECT ... FOR UPDATE` to show how PostgreSQL waits when two sessions update the same nurse-visit row.
 
-**Observed result:** [Record what appeared in each session and how commit/rollback affected it. Add screenshots or query output.]
+**Observed result:** The pgAdmin transaction demo committed event 1, rolled the optional event 2 back to a savepoint, then fully rolled event 3 back. A follow-up query returned only `1, committed example`; CSV: `evidence/portfolio-3/transaction-final-state.csv`. The two-session row-lock waiting/release exercise and screenshots are still pending.
 
 ## Portfolio 4 — NoSQL and advanced data models
 
-MongoDB embeds video consultation history and prescription details in patient documents; separate doctor, nurse, and pharmacy collections support shared profiles and pharmacy geospatial search. Nurse care requests reference the prescription and nurse and embed repeated visit slots. This suits patient-centered reads but trades off relationally enforced references. Compass evidence should show the imported fictional collections, indexes, and search results.
+MongoDB Compass shows 2 patient, 2 doctor, 2 pharmacy and 2 nurse documents plus 1 nurse care request containing two scheduled visits. Patient documents embed video consultation history and prescriptions; separate profile collections avoid repeated clinician and pharmacy fields. Pharmacy documents contain GeoJSON points. Only automatic `_id` indexes are confirmed; the additional indexes and nearby-pharmacy, patient-timeline, and nurse-schedule queries are still untested. Screenshots remain pending.
 
 ## Portfolio 5 — distributed/cloud exercise
 
