@@ -10,12 +10,18 @@ This table records what was actually run locally on 3 November 2026. Keep the sc
 | ERD and normalization | Drafted; not independently reviewed by student. | Review relationships and explain normalization. |
 | Query plans | Baseline and post-index appointment plans and the completed-payment aggregation plan are saved as CSV. All selected sequential scans at this sample size; the payment aggregate took 0.091 ms. | Capture screenshots and explain tiny-sample limitation. |
 | Commit/rollback/savepoint | Transaction script ran; follow-up query showed exactly event 1 (`committed example`) after savepoint and full rollback. CSV saved in `portfolio-3/transaction-final-state.csv`. | Capture screenshot. |
-| Concurrent row lock | Observed in pgAdmin on 2026-11-03: Session B waited about 26 seconds for Session A to commit; B and an accidentally queued duplicate update were rolled back; a final SELECT verified row 1 remained `booked`. Transcript, final-state CSV, and final query screenshot are saved locally. | Upload the screenshot to GitHub with the other screenshots. |
-| MongoDB documents | Compass shows 2 patients, 2 doctors, 2 pharmacies, 2 nurses, and 1 nurse care request with 2 care visits. | Capture screenshots. |
-| Mongo indexes and queries | Compass confirmed six non-`_id` indexes, nearest-active-pharmacy results, a linked nurse schedule and a 2dsphere explain plan. Evidence text is in `portfolio-4/mongodb-execution.txt`. The linked nurse query required correcting one stale local demo patient record; the imported JSON seed already contains that ID. | Capture Compass screenshots. |
+| Concurrent row lock | Observed in pgAdmin on 2026-11-03: Session B waited about 26 seconds for Session A to commit; B and an accidentally queued duplicate update were rolled back; a final SELECT verified row 1 remained `booked`. Transcript, final-state CSV, and final query screenshot saved locally. | Upload the screenshot to GitHub with the other screenshots. |
+| MongoDB documents | Compass shows 2 patients, 2 doctors, 2 pharmacies, 2 nurses, and 1 nurse care request with 2 care visits. Portfolio 4 now explains the document model, embedding/reference choices, geospatial query, and trade-offs. A Compass screenshot of the connection and geospatial plan is saved locally. | Capture screenshots. |
+| Mongo indexes and queries | Compass confirmed six non-`_id` indexes, nearest-active-pharmacy results, a linked nurse schedule and a 2dsphere explain plan. Evidence text is in `portfolio-4/mongodb-execution.txt`. The linked nurse query required correcting one stale local demo patient record; the imported JSON seed already contains that ID. | Capture focused Compass screenshots of the documents and nurse aggregation, then upload the evidence to GitHub. |
 | Distributed/cloud activity | Architecture discussion and diagram drafted. No cloud deployment claimed. | Review and defend consistency, failover and scale-out choices. |
 | GitHub | Private repository contains portfolio drafts and the existing SQL/Mongo outputs. The completed-payment plan is now uploaded; confirm all evidence and current documentation stay in sync. | Capture and upload screenshots; final repository consistency review. Do not claim semester-long progressive history. |
 | LMS summary and AI declaration | Template only; student reflection and declaration require truthful personal completion. | Complete and page-check the final 2–3 page document. |
 | LMS submission | Not performed. | Student reviews and submits. |
 
 All records and pharmacy points are fictional coursework examples. Sample medication text is not medical guidance.
+
+
+
+
+
+
