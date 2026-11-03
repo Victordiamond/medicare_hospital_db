@@ -25,7 +25,7 @@ The transaction script demonstrates `COMMIT`, `ROLLBACK`, and savepoint rollback
 
 ## Portfolio 4 — NoSQL and advanced data models
 
-MongoDB Compass shows 2 patient, 2 doctor, 2 pharmacy and 2 nurse documents plus 1 nurse care request containing two scheduled visits. Patient documents embed video consultation history and prescriptions; separate profile collections avoid repeated clinician and pharmacy fields. Pharmacy documents contain GeoJSON points. Only automatic `_id` indexes are confirmed; the additional indexes and nearby-pharmacy, patient-timeline, and nurse-schedule queries are still untested. Screenshots remain pending.
+MongoDB Compass shows 2 patient, 2 doctor, 2 pharmacy and 2 nurse documents plus 1 nurse care request containing two scheduled visits. Patient documents embed video consultation history and prescriptions; separate profile collections avoid repeated clinician and pharmacy fields. Pharmacy documents contain GeoJSON points. Six secondary indexes were created and verified. The nearest-pharmacy query returned two pharmacies; the patient timeline returned Ada’s video consultation; the nurse aggregation returned two booked visits and clinician prescription DEMO-RX-001. The geospatial plan used `location_2dsphere` (`GEO_NEAR_2DSPHERE`), examined 4 keys and 4 documents, returned 2, and reported 9 ms on the two-pharmacy sample. The imported patient was missing the embedded prescriptionId; an updateOne matched and modified one demo record, after which the aggregation succeeded. Screenshot files remain pending.
 
 ## Portfolio 5 — distributed/cloud exercise
 
@@ -40,4 +40,5 @@ The design discussion proposes a PostgreSQL primary with a standby replica, read
 **AI-use declaration (complete truthfully):** “I used ChatGPT to [state what help it provided, for example: organise requirements, explain design options, draft example SQL]. I personally [state exactly what you reviewed, ran, tested, corrected, and wrote yourself]. I verified the submitted results by [name the actual evidence].” Add any other tools, datasets, libraries, and documentation you used. Do not claim a test, review, or reflection you did not perform.
 
 **References:** [List the PostgreSQL and MongoDB documentation, course materials, datasets, diagrams, and other sources actually consulted, using the citation style required by your lecturer.]
+
 
