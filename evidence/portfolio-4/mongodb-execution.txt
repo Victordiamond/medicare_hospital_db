@@ -28,5 +28,5 @@ Geospatial execution plan captured with `explain("executionStats")`:
 - indexName: location_2dsphere
 - totalKeysExamined: 4; totalDocsExamined: 4; nReturned: 2; executionTimeMillis: 9
 
-These timings and counts describe a two-pharmacy demonstration only; they are not a production performance claim. All sample data are fictional. Screenshot files are still pending.
+These timings and counts describe a two-pharmacy demonstration only; they are not a production performance claim. All sample data are fictional. One full-window Compass execution-plan screenshot is saved as `compass-shell-results.jpg`. Focused screenshots of the document and nurse schedule results are pending.
 
