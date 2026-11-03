@@ -3,7 +3,7 @@
 **Student:** [enter your name and matriculation number]  
 **Session:** 2026/2027, First Semester  
 **Case study:** MediCare telemedicine platform (simulated)  
-**GitHub repository:** [add your private repository URL after confirming assessor access]
+**GitHub repository:** https://github.com/Victordiamond/medicare_hospital_db
 
 ## Case study and portfolio 1 — relational design
 

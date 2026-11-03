@@ -1,6 +1,7 @@
 # MIT 8103 Advanced Database Systems — MediCare
 
-**Case study:** MediCare Hospital Management System, developed here as a simulated telemedicine platform.
+**Case study:** MediCare Hospital Management System, developed here as a simulated telemedicine platform.  
+**Private portfolio repository:** https://github.com/Victordiamond/medicare_hospital_db
 
 Patients search for doctors, book a video consultation, share symptoms, and receive a prescription. They can locate nearby pharmacies to fulfil it or select a nurse and schedule prescription-linked care visits over a planned treatment period. Doctors, nurses, pharmacy staff, and billing staff have separate database responsibilities.
 

@@ -12,7 +12,7 @@ The local database work and document model were confirmed in an earlier pgAdmin/
 | Concurrent row lock | Exercise documented, not yet observed | Use two pgAdmin sessions; record the wait/release and final row state. |
 | MongoDB model | Patient/doctor collections previously verified; new pharmacy/nurse collections are prepared only | Import the new JSON collections, build the indexes, and capture a nearby-pharmacy search and nurse schedule. |
 | Distributed/cloud activity | Design discussion drafted; no cloud setup claimed | Add an architecture sketch and explain availability/consistency trade-offs in your own words. |
-| GitHub repository and progressive commits | Not performed | Create/use your private repository and add work progressively; do not fabricate earlier commit history. |
+| GitHub repository and progressive commits | Private repository created; portfolio draft committed and folder paths verified | Add actual evidence and later updates as you complete them. Do not claim this represents development throughout the semester or fabricate earlier history. |
 | 2–3 page LMS documentation | Draft template only | Fill measurements, references, actual GitHub URL, and your own reflection; check final page count. |
 | AI declaration and source acknowledgement | Suggested declaration included | Make it accurate to the assistance and review you actually performed. |
 | LMS submission | Not performed | Submit the finished documentation and evidence yourself after review. |
