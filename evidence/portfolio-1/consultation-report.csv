@@ -1,0 +1,4 @@
+"appointment_id","consultation_time","patient","doctor","consultation_mode","consultation_status","symptoms_summary","diagnosis","prescriptions","selected_pharmacies","amount_due","paid_amount","balance"
+2,"2026-11-01 14:00:00+01","Musa Okeke","Amara Eze","video","completed",NULL,"Demo diagnosis","SAMPLE MEDICATION B",NULL,8500.00,0,8500.00
+1,"2026-11-02 09:00:00+01","Ada Nwosu","Tunde Bello","video","completed",NULL,"Demo diagnosis","SAMPLE MEDICATION A","Demo Pharmacy Ikeja",15000.00,15000.00,0.00
+
