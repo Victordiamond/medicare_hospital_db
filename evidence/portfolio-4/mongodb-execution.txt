@@ -1,0 +1,32 @@
+MongoDB Compass / mongosh evidence — 2026-11-03
+Connection: localhost:27017; database: medicare_hospital_db
+
+Secondary indexes created and returned by getIndexes():
+- doctors: specialization_1_offersVideoConsultations_1
+- patients: appointments.appointmentStart_1
+- pharmacies: location_2dsphere
+- nurses: specialty_1_isActive_1
+- nurseCareRequests: patientId_1_plannedStartDate_1, nurseId_1_plannedStartDate_1
+(Each collection also has its automatic _id_ index.)
+
+Nearest active pharmacy query, 10,000 m maximum, origin [3.3792, 6.5244], returned two documents in nearest-first order:
+1. DEMO-PHARM-002 — Demo Pharmacy Yaba; coordinates [3.3686, 6.5158]
+2. DEMO-PHARM-001 — Demo Pharmacy Ikeja; coordinates [3.3515, 6.6018]
+
+Patient consultation-history query returned Ada Nwosu (DEMO-PAT-001), doctor DEMO-DOC-001, appointment 2026-11-02T09:00:00+01:00, with the fictional sample prescription.
+
+Nurse schedule aggregation returned one document:
+- request DEMO-CARE-001; patient DEMO-PAT-001; nurse DEMO-NURSE-001
+- plan dates 2026-11-05 through 2026-11-12; weekly
+- visits DEMO-NVISIT-001 on Nov 5 and DEMO-NVISIT-002 on Nov 12, both booked
+- linked clinician prescription DEMO-RX-001 / SAMPLE MEDICATION A
+
+The first schedule aggregation returned an empty array because the existing Compass patient seed predated its prescriptionId field. Compass shell `updateOne` corrected the fictional demo patient; result: acknowledged=true, matchedCount=1, modifiedCount=1, upsertedCount=0. The schedule aggregation was rerun and returned the one matching request above. The current `patients.json` seed already includes this prescriptionId.
+
+Geospatial execution plan captured with `explain("executionStats")`:
+- winning plan: FETCH over GEO_NEAR_2DSPHERE
+- indexName: location_2dsphere
+- totalKeysExamined: 4; totalDocsExamined: 4; nReturned: 2; executionTimeMillis: 9
+
+These timings and counts describe a two-pharmacy demonstration only; they are not a production performance claim. All sample data are fictional. Screenshot files are still pending.
+
