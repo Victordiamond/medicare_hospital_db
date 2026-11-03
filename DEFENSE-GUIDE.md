@@ -32,10 +32,12 @@ Use the evidence from your own runs. These prompts help you explain the work; th
 
 ## Portfolio 5: distributed/cloud
 
-- Explain the primary/standby/read-replica roles and what data lag means for searching or booking.
-- Explain the availability and consistency trade-off between synchronous and asynchronous replication.
-- Explain why sharding is a later scale decision, not the first step for a small demo.
-- State clearly that the portfolio presents a design, not a deployed cloud service.
+- Explain why the PostgreSQL primary is authoritative for appointments, prescriptions, nurse bookings, billing, and payments; the patient history in MongoDB is a projection and needs an idempotent outbox consumer.
+- Distinguish stale-tolerant browsing/reporting from availability checks and read-after-write confirmation, which should use the authoritative store.
+- Explain that synchronous replication can reduce acknowledged data loss at a latency/availability cost, while asynchronous replication can lag and lose recent changes if promoted.
+- Describe fencing before standby promotion, backup/PITR for operator error, and why replica copies are not backups.
+- Explain why this tiny demo does not justify sharding yet, and name one likely partition key plus its cross-shard cost if the service grows.
+- State clearly that the portfolio presents a design. No cloud deployment, replica lag measurement, failover exercise, or restore drill has been performed.
 
 ## Student reflection
 
