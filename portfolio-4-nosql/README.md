@@ -1,10 +1,10 @@
 # Portfolio 4 — NoSQL and advanced data models
 
-MongoDB Compass connected to `localhost:27017/medicare_hospital_db`. On 3 November 2026 the following fictional JSON collections were imported and visually verified: 2 patients, 2 doctors, 2 pharmacies, 2 nurses and 1 nurse care request. The request references a sample patient, nurse and prescription and embeds two scheduled visits. Pharmacy documents contain GeoJSON points.
+MongoDB Compass is connected to `localhost:27017/medicare_hospital_db`. On 3 November 2026 Compass verified 2 patients, 2 doctors, 2 pharmacies, 2 nurses, and 1 nurse care request with two visit slots. The current dataset is fictional.
 
-The files are the seed data for a patient-centered consultation history, separate clinician/pharmacy/nurse profiles, and a nurse care request with a bounded visit schedule. Embedding makes these related timeline details convenient to retrieve with the patient or request; separate profile documents avoid repeating names and contact fields. The trade-off is that global reporting and referential integrity need additional queries/application checks.
+The shell created and verified these indexes: doctor specialization/video flag; patient appointment time; pharmacy GeoJSON `2dsphere`; nurse specialty/active status; and care-request patient/date and nurse/date. The `$near` search returned both sample pharmacies in nearest-first order. The consultation history returned Ada Nwosu’s video visit and prescription. The corrected nurse schedule aggregation returned `DEMO-CARE-001`, its two booked visits, and the linked clinician prescription. Raw observations and the MongoDB geospatial execution plan are in [`../evidence/portfolio-4/mongodb-execution.txt`](../evidence/portfolio-4/mongodb-execution.txt).
 
-Additional indexes and sample queries in `indexes.js` and `queries.mongodb.js` remain unexecuted; only the automatic `_id` indexes are currently verified. In particular, nearest-pharmacy `$near` needs the `location: 2dsphere` index before it can be tested. Capture Compass screenshots and query results after those steps.
+The imported Compass patient record came from an earlier seed that lacked the embedded `prescriptionId`; `updateOne` matched and modified one fictional record to add `DEMO-RX-001`, after which the nurse aggregation succeeded. The checked-in `patients.json` seed already includes that field.
 
-All profiles, coordinates and care details are fictional. Medication instructions are placeholders, not health advice.
+Embedding consultation/prescription history suits patient-centered reads. Separate profiles prevent repeated contact information. Nurse requests keep a bounded set of visits together. The cost is that cross-document references need application checks. All medication values and locations are placeholders, not clinical advice. Screenshots remain to be saved in the repository.
 
