@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "DEMO-DOC-001",
+    "firstName": "Tunde",
+    "lastName": "Bello",
+    "specialization": "Cardiology",
+    "professionalBio": "Fictional profile for the video consultation demo.",
+    "offersVideoConsultations": true,
+    "phone": "+2348000000011",
+    "email": "tunde.bello@example.test",
+    "licenseNumber": "DEMO-LIC-001",
+    "isActive": true
+  },
+  {
+    "_id": "DEMO-DOC-002",
+    "firstName": "Amara",
+    "lastName": "Eze",
+    "specialization": "General Practice",
+    "professionalBio": "Fictional profile for the video consultation demo.",
+    "offersVideoConsultations": true,
+    "phone": "+2348000000012",
+    "email": "amara.eze@example.test",
+    "licenseNumber": "DEMO-LIC-002",
+    "isActive": true
+  }
+]
+

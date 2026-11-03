@@ -1,0 +1,21 @@
+[
+  {
+    "_id": "DEMO-PHARM-001",
+    "pharmacyName": "Demo Pharmacy Ikeja",
+    "address": "Sample location, Ikeja, Lagos",
+    "phone": "+2348000000101",
+    "location": { "type": "Point", "coordinates": [3.3515, 6.6018] },
+    "isActive": true,
+    "courseworkData": true
+  },
+  {
+    "_id": "DEMO-PHARM-002",
+    "pharmacyName": "Demo Pharmacy Yaba",
+    "address": "Sample location, Yaba, Lagos",
+    "phone": "+2348000000102",
+    "location": { "type": "Point", "coordinates": [3.3686, 6.5158] },
+    "isActive": true,
+    "courseworkData": true
+  }
+]
+

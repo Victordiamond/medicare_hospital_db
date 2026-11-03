@@ -1,0 +1,31 @@
+[
+  {
+    "_id": "DEMO-CARE-001",
+    "patientId": "DEMO-PAT-001",
+    "prescriptionId": "DEMO-RX-001",
+    "nurseId": "DEMO-NURSE-001",
+    "plannedStartDate": "2026-11-05",
+    "plannedEndDate": "2026-11-12",
+    "visitFrequency": "weekly",
+    "patientRequestNotes": "Fictional coursework request.",
+    "status": "requested",
+    "careVisits": [
+      {
+        "visitId": "DEMO-NVISIT-001",
+        "startAt": "2026-11-05T10:00:00+01:00",
+        "endAt": "2026-11-05T10:45:00+01:00",
+        "status": "booked",
+        "nurseNotes": null
+      },
+      {
+        "visitId": "DEMO-NVISIT-002",
+        "startAt": "2026-11-12T10:00:00+01:00",
+        "endAt": "2026-11-12T10:45:00+01:00",
+        "status": "booked",
+        "nurseNotes": null
+      }
+    ],
+    "courseworkData": true
+  }
+]
+

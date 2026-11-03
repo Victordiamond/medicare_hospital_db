@@ -1,0 +1,107 @@
+[
+  {
+    "_id": "DEMO-PAT-001",
+    "firstName": "Ada",
+    "lastName": "Nwosu",
+    "dateOfBirth": "1992-04-18",
+    "contact": {
+      "phone": "+2348000000001",
+      "email": "ada.nwosu@example.test",
+      "address": "Sample address, Lagos"
+    },
+    "appointments": [
+      {
+        "appointmentId": "DEMO-APP-001",
+        "doctorId": "DEMO-DOC-001",
+        "consultationMode": "video",
+        "meetingReference": "DEMO-ROOM-001",
+        "symptomsSummary": "Fictional coursework symptom summary.",
+        "appointmentStart": "2026-11-02T09:00:00+01:00",
+        "appointmentEnd": "2026-11-02T09:30:00+01:00",
+        "status": "completed",
+        "reason": "Sample follow-up",
+        "medicalRecord": {
+          "diagnosis": "Demo diagnosis",
+          "treatmentNotes": "Fictional coursework record; not clinical guidance.",
+          "followUpNotes": "Demo follow-up"
+        },
+        "prescriptions": [
+          {
+            "prescriptionId": "DEMO-RX-001",
+            "medicationName": "SAMPLE MEDICATION A",
+            "dosage": "Demo only",
+            "frequency": "Demo only",
+            "instructions": "Fictional placeholder; not a medical recommendation.",
+            "pharmacyFulfillment": {
+              "pharmacyId": "DEMO-PHARM-001",
+              "status": "requested",
+              "pickupReference": "DEMO-PICKUP-001"
+            }
+          }
+        ],
+        "billing": {
+          "billingId": "DEMO-BILL-001",
+          "description": "Sample consultation fee",
+          "amountDue": 15000.00,
+          "currency": "NGN",
+          "status": "paid",
+          "payments": [
+            {
+              "paymentId": "DEMO-PAY-001",
+              "amount": 15000.00,
+              "method": "bank_transfer",
+              "status": "completed"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "_id": "DEMO-PAT-002",
+    "firstName": "Musa",
+    "lastName": "Okeke",
+    "dateOfBirth": "1987-09-03",
+    "contact": {
+      "phone": "+2348000000002",
+      "email": "musa.okeke@example.test",
+      "address": "Sample address, Abuja"
+    },
+    "appointments": [
+      {
+        "appointmentId": "DEMO-APP-002",
+        "doctorId": "DEMO-DOC-002",
+        "consultationMode": "video",
+        "meetingReference": "DEMO-ROOM-002",
+        "symptomsSummary": "Fictional coursework symptom summary.",
+        "appointmentStart": "2026-11-01T14:00:00+01:00",
+        "appointmentEnd": "2026-11-01T14:30:00+01:00",
+        "status": "completed",
+        "reason": "Sample consultation",
+        "medicalRecord": {
+          "diagnosis": "Demo diagnosis",
+          "treatmentNotes": "Fictional coursework record; not clinical guidance.",
+          "followUpNotes": "Demo follow-up"
+        },
+        "prescriptions": [
+          {
+            "prescriptionId": "DEMO-RX-002",
+            "medicationName": "SAMPLE MEDICATION B",
+            "dosage": "Demo only",
+            "frequency": "Demo only",
+            "instructions": "Fictional placeholder; not a medical recommendation."
+          }
+        ],
+        "billing": {
+          "billingId": "DEMO-BILL-002",
+          "description": "Sample consultation fee",
+          "amountDue": 8500.00,
+          "currency": "NGN",
+          "status": "unpaid",
+          "payments": []
+        }
+      }
+    ]
+  }
+]
+

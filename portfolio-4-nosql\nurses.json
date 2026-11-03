@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "DEMO-NURSE-001",
+    "firstName": "Kemi",
+    "lastName": "Demo",
+    "specialty": "Community nursing",
+    "phone": "+2348000000201",
+    "email": "kemi.demo@example.test",
+    "licenseNumber": "DEMO-NURSE-001",
+    "serviceArea": "Sample Lagos area",
+    "isActive": true,
+    "courseworkData": true
+  },
+  {
+    "_id": "DEMO-NURSE-002",
+    "firstName": "Emeka",
+    "lastName": "Sample",
+    "specialty": "Home care",
+    "phone": "+2348000000202",
+    "email": "emeka.sample@example.test",
+    "licenseNumber": "DEMO-NURSE-002",
+    "serviceArea": "Sample Lagos area",
+    "isActive": true,
+    "courseworkData": true
+  }
+]
+

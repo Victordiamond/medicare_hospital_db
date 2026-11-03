@@ -1,0 +1,16 @@
+flowchart LR
+    P[Patient app] --> API[Telemedicine application/API]
+    D[Doctor portal] --> API
+    N[Nurse portal] --> API
+    PH[Pharmacy portal] --> API
+    API --> PG[(PostgreSQL primary<br/>consultations, prescriptions,<br/>care bookings, billing)]
+    PG -->|streaming replication| ST[(Standby replica<br/>failover target)]
+    PG -->|read-only replication| RR[(Read replica<br/>search and reports)]
+    API --> MG[(MongoDB replica set<br/>patient history documents)]
+    API --> VIDEO[Video meeting provider<br/>meeting reference only in CA DB]
+    API --> MAP[Map and routing provider<br/>pharmacy coordinates/search]
+    API --> AUDIT[Audit logs and backup service]
+
+    classDef external fill:#fff4d6,stroke:#946200,color:#222;
+    class VIDEO,MAP external;
+

@@ -1,0 +1,114 @@
+erDiagram
+    PATIENTS ||--o{ APPOINTMENTS : books
+    DOCTORS ||--o{ APPOINTMENTS : attends
+    PATIENTS ||--o{ MEDICAL_RECORDS : owns
+    DOCTORS ||--o{ MEDICAL_RECORDS : writes
+    APPOINTMENTS o|--o{ MEDICAL_RECORDS : documents
+    MEDICAL_RECORDS o|--o{ PRESCRIPTIONS : motivates
+    PATIENTS ||--o{ PRESCRIPTIONS : receives
+    DOCTORS ||--o{ PRESCRIPTIONS : issues
+    PATIENTS ||--o{ BILLING : billed
+    APPOINTMENTS o|--o| BILLING : incurs
+    BILLING ||--o{ PAYMENTS : settled_by
+    PRESCRIPTIONS ||--o| PHARMACY_FULFILLMENTS : filled_by
+    PATIENTS ||--o{ PHARMACY_FULFILLMENTS : requests
+    PHARMACIES ||--o{ PHARMACY_FULFILLMENTS : serves
+    PATIENTS ||--o{ NURSE_CARE_REQUESTS : requests
+    PRESCRIPTIONS ||--o{ NURSE_CARE_REQUESTS : guides
+    NURSES ||--o{ NURSE_CARE_REQUESTS : selected_for
+    NURSE_CARE_REQUESTS ||--o{ NURSE_VISITS : schedules
+    NURSES ||--o{ NURSE_VISITS : performs
+
+    PATIENTS {
+        bigint patient_id PK
+        varchar first_name
+        varchar last_name
+        date date_of_birth
+        varchar email UK
+    }
+    DOCTORS {
+        bigint doctor_id PK
+        varchar first_name
+        varchar last_name
+        varchar specialization
+        varchar license_number UK
+        boolean offers_video_consultations
+    }
+    APPOINTMENTS {
+        bigint appointment_id PK
+        bigint patient_id FK
+        bigint doctor_id FK
+        timestamptz appointment_start
+        varchar consultation_mode
+        varchar meeting_reference
+        text symptoms_summary
+        varchar status
+    }
+    MEDICAL_RECORDS {
+        bigint medical_record_id PK
+        bigint patient_id FK
+        bigint doctor_id FK
+        bigint appointment_id FK
+        text diagnosis
+    }
+    PRESCRIPTIONS {
+        bigint prescription_id PK
+        bigint medical_record_id FK
+        bigint patient_id FK
+        bigint doctor_id FK
+        varchar medication_name
+    }
+    BILLING {
+        bigint billing_id PK
+        bigint patient_id FK
+        bigint appointment_id FK
+        numeric amount_due
+        varchar status
+    }
+    PAYMENTS {
+        bigint payment_id PK
+        bigint billing_id FK
+        numeric amount
+        varchar payment_method
+        varchar status
+    }
+    PHARMACIES {
+        bigint pharmacy_id PK
+        varchar pharmacy_name
+        text address
+        numeric latitude
+        numeric longitude
+        boolean is_active
+    }
+    PHARMACY_FULFILLMENTS {
+        bigint fulfillment_id PK
+        bigint prescription_id FK
+        bigint patient_id FK
+        bigint pharmacy_id FK
+        varchar status
+    }
+    NURSES {
+        bigint nurse_id PK
+        varchar first_name
+        varchar last_name
+        varchar specialty
+        varchar license_number UK
+    }
+    NURSE_CARE_REQUESTS {
+        bigint care_request_id PK
+        bigint patient_id FK
+        bigint prescription_id FK
+        bigint nurse_id FK
+        date planned_start_date
+        date planned_end_date
+        varchar visit_frequency
+    }
+    NURSE_VISITS {
+        bigint nurse_visit_id PK
+        bigint care_request_id FK
+        bigint nurse_id FK
+        timestamptz visit_start
+        timestamptz visit_end
+        varchar status
+    }
+
