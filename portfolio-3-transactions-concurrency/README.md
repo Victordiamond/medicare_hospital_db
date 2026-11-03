@@ -4,5 +4,6 @@ The temporary-table demonstration was run in pgAdmin on 3 November 2026. It inse
 
 This verifies the transaction/savepoint/full-rollback result for the current pgAdmin session. The table is temporary and contains no hospital records.
 
-The separate two-session row-lock exercise is still untested. In Session A, hold a `FOR UPDATE` lock on the sample nurse visit; in Session B, update that same row and observe the wait; commit A and observe B continue; roll back B. Record only what is observed and the isolation level.
+The row-lock exercise was then observed in pgAdmin on 3 November 2026. Session A ran `BEGIN` and selected nurse visit 1 `FOR UPDATE`. Session B began a transaction and attempted to set its status to `in_progress`; pgAdmin showed the command waiting while A held the lock. A committed, and B's update completed after about 26 seconds. B was rolled back. An extra query tool had also queued an identical update unintentionally; it too was rolled back. A fresh query returned nurse visit 1 with status `booked`, confirming both attempted changes were undone. See [`../evidence/portfolio-3/row-lock-observation.md`](../evidence/portfolio-3/row-lock-observation.md) and [`../evidence/portfolio-3/lock-final-state.csv`](../evidence/portfolio-3/lock-final-state.csv).
 
+This demonstrates the observed PostgreSQL row-level write conflict behavior in this local session only. It is not a benchmark or a production throughput claim. Screenshots remain to be captured.
