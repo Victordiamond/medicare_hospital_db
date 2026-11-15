@@ -3,33 +3,35 @@
 **Student:** [enter your name and matriculation number]  
 **Session:** 2026/2027, First Semester  
 **Case study:** MediCare telemedicine platform (simulated)  
-**GitHub repository:** https://github.com/Victordiamond/medicare_hospital_db
+**GitHub repository:** https://github.com/Victordiamond/medicare_hospital_301911811
 
 ## Case study and portfolio 1 — relational design
 
 MediCare is a simulated telemedicine platform used by patients, doctors, nurses, and pharmacy staff. Patients find a doctor and book a video consultation, share symptoms, and receive a prescription. They can locate nearby pharmacies or request a nurse for prescription-linked care with a planned schedule of visits. PostgreSQL tables cover patients, doctors, consultations, records, prescriptions, pharmacy fulfillment, nurses, care requests, visits, billing, and payments. Foreign keys, uniqueness rules, and check constraints protect important relationships and values. The sample data are fictional.
 
+The schema and two-row consultation report ran in pgAdmin. The report shows the fictional appointments, but both seeded `symptoms_summary` values are blank, so the current output does not demonstrate symptom capture. The pharmacy-distance and nurse-schedule SELECT statements exist in the schema script; their result outputs have not been saved as evidence.
+
 **Student's design explanation:** [In your own words, explain the appointment relationships, one integrity rule, and one normalisation decision.]
 
 ## Portfolio 2 — query processing and optimisation
 
-The consultation-history query joins patients, video appointments, doctors, and optional medical records. The optimisation exercise captures PostgreSQL's `EXPLAIN (ANALYZE, BUFFERS)` output before and after a composite patient/date index, and examines a partial index for completed payments.
+The SQL file includes a patient-history report joining patients, appointments, doctors, and optional medical records. Its measured plan comparison is a separate appointment lookup filtered by patient and sorted by appointment time, plus a completed-payment aggregation.
 
-**Measured result (PostgreSQL 18, two appointment rows):** Both EXPLAIN ANALYZE plans estimated one result row and returned one. Before the composite index, the appointment access used `Seq Scan` followed by `Sort`; shared buffers were hit=3 and execution time was 0.068 ms. After index creation, PostgreSQL still chose `Seq Scan` and `Sort`; shared buffers were hit=3 and execution time was 0.087 ms. The patient-email lookup used its existing unique index in both runs. These tiny times do not establish a performance change; a larger dataset is needed. Raw outputs: `evidence/portfolio-2/plan-before-index.csv` and `plan-after-index.csv`. The completed-payment partial-index query is not yet tested.
+**Measured result (PostgreSQL 18, two appointment rows):** Before the composite index, PostgreSQL used `Seq Scan` followed by `Sort`; estimated and actual rows were 1, shared buffers were hit=3, and execution time was 0.068 ms. After index creation it still used `Seq Scan` and `Sort`; shared buffers were hit=3 and execution time was 0.087 ms. The patient email subquery used its existing unique index in both plans. The completed-payment aggregation was also run; it used a sequential scan of one payment row and a hash aggregate, took 0.091 ms, and did not use the partial index. These tiny measurements do not show an index speedup. Raw CSV plans are in `evidence/portfolio-2/`.
 
 ## Portfolio 3 — transactions and concurrency
 
 The transaction script demonstrates `COMMIT`, `ROLLBACK`, and savepoint rollback on a temporary table so the hospital demo rows are not changed. A two-session exercise uses `SELECT ... FOR UPDATE` to show how PostgreSQL waits when two sessions update the same nurse-visit row.
 
-**Observed result:** The pgAdmin transaction demo committed event 1, rolled the optional event 2 back to a savepoint, then fully rolled event 3 back. A follow-up query returned only `1, committed example`; CSV: `evidence/portfolio-3/transaction-final-state.csv`. The two-session row-lock waiting/release exercise and screenshots are still pending.
+**Observed result:** The pgAdmin transaction demo committed event 1, rolled event 2 back to a savepoint, and fully rolled event 3 back. The follow-up query returned only `1, committed example`. In the two-session test, Session B waited about 26 seconds for Session A to release nurse visit 1; both attempted changes were rolled back and the final row remained `booked`. CSVs, the observed sequence, and the final-query screenshot are in `evidence/portfolio-3/`; the screenshot is uploaded to GitHub.
 
 ## Portfolio 4 — NoSQL and advanced data models
 
-MongoDB Compass shows 2 patient, 2 doctor, 2 pharmacy and 2 nurse documents plus 1 nurse care request containing two scheduled visits. Patient documents embed video consultation history and prescriptions; separate profile collections avoid repeated clinician and pharmacy fields. Pharmacy documents contain GeoJSON points. Six secondary indexes were created and verified. The nearest-pharmacy query returned two pharmacies; the patient timeline returned Ada’s video consultation; the nurse aggregation returned two booked visits and clinician prescription DEMO-RX-001. The geospatial plan used `location_2dsphere` (`GEO_NEAR_2DSPHERE`), examined 4 keys and 4 documents, returned 2, and reported 9 ms on the two-pharmacy sample. The imported patient was missing the embedded prescriptionId; an updateOne matched and modified one demo record, after which the aggregation succeeded. Screenshot files remain pending.
+MongoDB Compass shows 2 patients, 2 doctors, 2 pharmacies, 2 nurses, and 1 nurse care request with two booked visits. Six secondary indexes were verified. The nearby-pharmacy query returned Yaba then Ikeja; the patient timeline returned Ada's video consultation; the nurse aggregation returned both scheduled visits and linked prescription DEMO-RX-001. The geospatial plan used `location_2dsphere` (`GEO_NEAR_2DSPHERE`), examined 4 keys and 4 documents, returned 2, and reported 9 ms on the two-pharmacy sample. The existing Compass patient document initially lacked `prescriptionId`; one fictional record was updated and the rerun succeeded. The Compass connection and geospatial plan screenshot is uploaded to GitHub. Focused screenshots of the documents and nurse output remain pending. These counts and timings describe demo data only.
 
 ## Portfolio 5 — distributed/cloud exercise
 
-The design discussion proposes a PostgreSQL primary with a standby replica, read-only search/reporting replicas, tested failover and backups, and carefully chosen partitioning/sharding only if multi-region scale requires it. Replication lag and cross-shard operations affect consistency. This is a design exercise; no cloud deployment is claimed.
+The design discussion proposes a PostgreSQL primary, standby, read replica, and MongoDB replica set, with a single authoritative writer for correctness-sensitive bookings and payments. It explains replica lag, failover fencing, backups, and why partitioning or sharding should follow measured need. It is a design exercise only: no cloud deployment, failover, lag measurement, or restore drill was performed.
 
 ## Technical reflection — write this yourself
 

@@ -24,7 +24,7 @@ MongoDB Compass was connected to `localhost:27017/medicare_hospital_db` on 3 Nov
 
 The already-imported local patient document initially lacked the nested `prescriptionId`, so the first schedule aggregation returned an empty array. A Compass `updateOne` matched and modified one fictional record to add the ID; the rerun returned the linked schedule. The checked-in `patients.json` seed already includes it. This difference between the imported state and the seed is documented in [`../evidence/portfolio-4/import-verification.md`](../evidence/portfolio-4/import-verification.md).
 
-Observed results and the explain summary are in [`../evidence/portfolio-4/mongodb-execution.txt`](../evidence/portfolio-4/mongodb-execution.txt). A Compass shell screenshot is saved locally and in the private GitHub evidence folder at [`../evidence/portfolio-4/compass-shell-results.jpg`](../evidence/portfolio-4/compass-shell-results.jpg). All sample data are fictional, and medication placeholders are not medical advice.
+Observed results and the explain summary are in [`../evidence/portfolio-4/mongodb-execution.txt`](../evidence/portfolio-4/mongodb-execution.txt). A Compass shell screenshot is saved locally and in the GitHub evidence folder at [`../evidence/portfolio-4/compass-shell-results.jpg`](../evidence/portfolio-4/compass-shell-results.jpg). All sample data are fictional, and medication placeholders are not medical advice.
 
 ## How to reproduce
 

@@ -16,6 +16,6 @@ The six secondary indexes, nearby-pharmacy query, patient timeline, nurse schedu
 
 The preexisting patient document was imported before the nested prescriptionId was present. The first nurse aggregation returned no rows; a Compass `updateOne` matched and modified one fictional patient to add the id, and the rerun returned the expected linked nurse request. The checked-in `patients.json` seed already contains this field.
 
-A full-window Compass shell screenshot is saved as `compass-shell-results.jpg`; it shows the active MongoDB connection, database collections, and geospatial explain summary. Additional focused screenshots of the document contents and query outputs are still pending.
+A full-window Compass shell screenshot is saved as `compass-shell-results.jpg` and uploaded to GitHub; it shows the active MongoDB connection, database collections, and geospatial explain summary. Additional focused screenshots of the document contents and query outputs are still pending.
 
 

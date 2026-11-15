@@ -1,6 +1,14 @@
-# Evidence folder
+# Evidence index
 
-Place genuine screenshots and saved query outputs from your local pgAdmin and MongoDB Compass sessions in the matching portfolio folder. Do not use recreated mock screenshots or type estimated plan timings as evidence.
+Keep genuine database outputs and screenshots under the matching portfolio folder. Never recreate a screenshot or state an estimated query plan as an observed result.
 
-Current state: the portfolio sources are in the private GitHub repository. The prior seven-table PostgreSQL sample and MongoDB patient/doctor collections were verified in earlier work. The new telemedicine SQL changes, pharmacy/nurse collections, updated execution plans, screenshots, and concurrency output have not yet been confirmed in this session. A direct PostgreSQL connection attempt was rejected because no password was supplied; pgAdmin was minimized and automation recovery could not capture it. No new PostgreSQL changes are claimed from that attempt. The new MongoDB JSON files pass syntax checks only; they have not been imported or queried in Compass.
+## Verified artifacts
+
+- **Portfolio 1:** pgAdmin schema execution messages and a two-row consultation report CSV are saved. The appointment symptoms field is blank in both rows. Pharmacy-distance/nurse-schedule outputs and pgAdmin screenshots are not yet saved.
+- **Portfolio 2:** baseline, post-index, and completed-payment `EXPLAIN (ANALYZE, BUFFERS, VERBOSE)` CSVs are saved. On the two-appointment/one-payment sample, the appointment plans retained sequential scans and the payment aggregate used a sequential scan. Screenshots and the separate history-query output are not saved.
+- **Portfolio 3:** transaction final-state CSV, row-lock final-state CSV, and the observed row-lock sequence are saved. The final `booked` result has a pgAdmin screenshot uploaded to GitHub. A screenshot of the temporary-table transaction output is not saved.
+- **Portfolio 4:** Compass import counts, index names, pharmacy query, patient-history query, nurse aggregation, and geospatial explain statistics are recorded. A full-window Compass screenshot is uploaded. Focused document/nurse-result screenshots are not saved.
+- **Portfolio 5:** an SVG architecture and its editable Mermaid source are included. This is design evidence only; no cloud replica, failover, lag measurement, or restore was deployed or tested.
+
+All sample records are fictional. The linked README files state the test limits and remaining evidence work.
 
