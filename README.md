@@ -1,7 +1,7 @@
 # MIT 8103 Advanced Database Systems — MediCare
 
 **Case study:** MediCare Hospital Management System, developed here as a simulated telemedicine platform.  
-**GitHub repository:** https://github.com/Victordiamond/medicare_hospital_301911811
+**GitHub repository:** [MediCare portfolio on GitHub](https://github.com/Victordiamond/medicare_hospital_301911811)
 
 Patients search for doctors, book a video consultation, share symptoms, and receive a prescription. They can locate nearby pharmacies to fulfil it or select a nurse and schedule prescription-linked care visits over a planned treatment period. Doctors, nurses, pharmacy staff, and billing staff have separate database responsibilities.
 
@@ -15,16 +15,15 @@ All sample identities, contact information, clinical details, prescription value
 4. [`portfolio-4-nosql/`](portfolio-4-nosql/) — MongoDB model, GeoJSON pharmacy search, nurse care requests, and indexes.
 5. [`portfolio-5-distributed-cloud/`](portfolio-5-distributed-cloud/) — replication, availability, consistency, and partitioning/sharding design.
 
-The 2–3 page LMS summary draft is in [`final-documentation/`](final-documentation/). Evidence requirements and current verification state are in [`evidence/CHECKLIST.md`](evidence/CHECKLIST.md). Evidence must be actual outputs/screenshots from your own local run; no screenshot or timing is represented as captured until saved in this repo.
+The 2–3 page portfolio summary is in [`final-documentation/portfolio-summary.md`](final-documentation/portfolio-summary.md), with an editable Word copy alongside it. Evidence requirements and current verification state are in [`evidence/CHECKLIST.md`](evidence/CHECKLIST.md). Evidence entries distinguish captured results from work still outstanding.
 
 ## Run order
 
-1. In pgAdmin, connect to `medicare_hospital_db` and run `portfolio-1-database-design/schema.sql`; it extends the existing tables without dropping them.
-2. Review the report, pharmacy-distance, and nurse-schedule outputs at the end of that script.
-3. Run the query plan exercise in Portfolio 2 and save both actual plans.
-4. Run the safe transaction script in Portfolio 3. Use two query sessions for the row-lock section; roll back the second session's update.
-5. In Compass, import the five JSON files in Portfolio 4 into collections named `patients`, `doctors`, `pharmacies`, `nurses`, and `nurseCareRequests`. Run `indexes.js`, then capture the nearby-pharmacy and nurse schedule query outputs.
-6. Review the distributed design in Portfolio 5 and be ready to explain the availability/consistency trade-off.
+1. The Portfolio 1 schema and consultation report have been run in pgAdmin. The saved sample consultation symptom fields are blank, and pharmacy-distance and nurse-schedule outputs still need capture.
+2. Portfolio 2 includes captured baseline and post-index plans for a two-appointment sample. PostgreSQL chose sequential scans in both; these results do not establish an index speedup.
+3. Portfolio 3 includes a saved transaction result, two-session lock observation, final state, and one pgAdmin screenshot. Review the script before rerunning because it is an instructional two-session exercise.
+4. Portfolio 4 was imported and queried in Compass. The geospatial explain screenshot is saved; focused document and nurse-result screenshots remain outstanding.
+5. Portfolio 5 is a written architecture proposal only; no cloud deployment, failover, replica-lag, or restore test was performed.
 
-Each major design decision is described in simple language in the portfolio README files. Add your measured results, screenshots, references, authentic personal reflection, and an accurate AI-use declaration before LMS submission. Current verification gaps are listed in `evidence/CHECKLIST.md`. LMS submission has not occurred.
+The portfolio summary identifies the student and records an accurate AI-use statement and evidence-based reflection. Current verification gaps are listed in `evidence/CHECKLIST.md`. LMS submission has not occurred. The assessment brief asks for a private repository; this repository remains public by the student's instruction.
 
