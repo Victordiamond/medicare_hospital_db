@@ -15,7 +15,7 @@ All sample identities, contact information, clinical details, prescription value
 4. [`portfolio-4-nosql/`](portfolio-4-nosql/) — MongoDB model, GeoJSON pharmacy search, nurse care requests, and indexes.
 5. [`portfolio-5-distributed-cloud/`](portfolio-5-distributed-cloud/) — replication, availability, consistency, and partitioning/sharding design.
 
-The 2–3 page portfolio summary is in [`final-documentation/portfolio-summary.md`](final-documentation/portfolio-summary.md), with an editable Word copy alongside it. Evidence requirements and current verification state are in [`evidence/CHECKLIST.md`](evidence/CHECKLIST.md). Evidence entries distinguish captured results from work still outstanding.
+The portfolio summary is in [`final-documentation/portfolio-summary.md`](final-documentation/portfolio-summary.md). The downloadable archive includes both this Markdown summary and an editable Word copy. Evidence requirements and current verification state are in [`evidence/CHECKLIST.md`](evidence/CHECKLIST.md). Evidence entries distinguish captured results from work still outstanding.
 
 ## Run order
 
